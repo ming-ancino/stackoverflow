@@ -14,9 +14,13 @@ QuestionPlatform::Application.routes.draw do
   #   resources :products
 
   resources :home
+  
+
   resources :questions do
-    resources :answers
+    resources :answers 
+    resources :comments
   end
+
   # Sample resource route with options:
   #   resources :products do
   #     member do

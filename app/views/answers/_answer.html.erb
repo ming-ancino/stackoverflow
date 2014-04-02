@@ -13,10 +13,13 @@
   Answered on:
   <%= answer.created_at %>
 </p>
- 
-
+ <h6><i>Comments
+<%= render answer.comments %>
+<br / >
+Add comment:</i></h6>
+<%= render "comments/form" %>
 <p>
-  <%= link_to 'Destroy Answer', [answer.question, answer],
+  <%= link_to 'Destroy Answer', [answer.container, answer],
                method: :delete,
                data: { confirm: 'Are you sure?' } %>
 </p>

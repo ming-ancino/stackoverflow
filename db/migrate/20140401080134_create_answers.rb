@@ -3,10 +3,9 @@ class CreateAnswers < ActiveRecord::Migration
     create_table :answers do |t|
       t.string :answerer
       t.text :body
-      t.references :question
+      t.references :container, :polymorphic => true
 
       t.timestamps
     end
-    add_index :answers, :question_id
   end
 end
