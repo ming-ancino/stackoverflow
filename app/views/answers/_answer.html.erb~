@@ -1,0 +1,22 @@
+
+<p>
+  <strong>Answer:</strong>
+  <%= answer.body %>
+</p>
+
+ <p>
+  <strong>From:</strong>
+  <%= answer.answerer %>
+</p>
+
+<p>
+  Answered on:
+  <%= answer.created_at %>
+</p>
+ 
+<hr/>
+<p>
+  <%= link_to 'Destroy Answer', [answer.question, answer],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+</p>

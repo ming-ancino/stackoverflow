@@ -1,0 +1,24 @@
+<p>
+  <h2>Subject:
+  <strong><%= @question.subject %></strong></h2>
+</p>
+ 
+<p>
+  Question:
+  <strong><%= @question.text %></strong>
+</p>
+ 
+<p>
+  Posted on:
+  <%= @question.created_at %>
+</p>
+
+<hr/>
+<h2><%=pluralize(@question.answers.count, "Answer")%></h2>
+<%= render @question.answers %>
+ 
+<h2>Add an answer:</h2>
+<%= render "answers/form" %>
+ 
+<%= link_to 'Edit Question', edit_question_path(@question) %> |
+<%= link_to 'Back to Questions', questions_path %>
