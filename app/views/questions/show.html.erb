@@ -7,18 +7,39 @@
   Question:
   <strong><%= @question.text %></strong>
 </p>
- 
+ <p>
+  Posted by:
+  <strong><%= @question.username %></strong>
+</p>
 <p>
   Posted on:
   <%= @question.created_at %>
 </p>
 
+<p>
+  Tags:
+  <%= @question.tags_used %>
+</p>
+<%= form_tag question_path(@question), :method => 'get' do %>
+  <div >
+  <% if -1 < @question.user_vote(@current_user) %>
+    <%= submit_tag "Downvote", :name => "vote"  %>
+  <% end %>
+
+    Vote: <%= @question.total_votes %>
+
+  <% if 1 > @question.user_vote(@current_user) %>
+    <%= submit_tag "Upvote", :name => "vote"  %>
+  <% end %>
+  </div>
+<% end %>
 <hr/>
 <h2><%=pluralize(@question.answers.count, "Answer")%></h2>
 <%= render @question.answers %>
  
 <h2>Add an answer:</h2>
 <%= render "answers/form" %>
- 
-<%= link_to 'Edit Question', edit_question_path(@question) %> |
+ <% if (@question.username == @current_user) %> 
+<%= link_to 'Edit Question', edit_question_path(@question) %> | 
+<% end %>
 <%= link_to 'Back to Questions', questions_path %>

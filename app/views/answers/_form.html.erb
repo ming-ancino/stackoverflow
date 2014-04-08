@@ -1,9 +1,5 @@
 <%= form_for([@question, @question.answers.build]) do |f| %>
   <p>
-    <%= f.label :From %><br />
-    <%= f.text_field :answerer %>
-  </p>
-  <p>
     <%= f.label :Answer %><br />
     <%= f.text_area :body %>
   </p>

@@ -1,22 +1,43 @@
+<h1>Hi <%= @current_user %>!</h1>
 <h1>Question List</h1>
-<%= link_to 'Add new question', new_question_path %>
-<table>
-  <tr>
-    <th>Subject</th>
-    <th>Question</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
- 
-<% @questions.each do |question| %>
-  <tr>
-    <td><%= question.subject %></td>
-    <td><%= question.text %></td>
-    <td><%= link_to 'Show', question_path(question) %></td>
-    <td><%= link_to 'Edit', edit_question_path(question) %></td>
-    <td><%= link_to 'Destroy', question_path(question),
-                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<%= form_tag questions_path, :method => 'get' do %>
+  <div class="field">
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </div>
 <% end %>
-</table>
+<%= link_to 'Add new question', new_question_path %>
+<% if @questions.count > 0 %>
+  <table>
+    <tr>
+      <th>Subject</th>
+      <th>Question</th>
+      <th>Creator</th>
+      <th>Tags</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+   
+  <% @questions.each do |question| %>
+    <tr>
+      <td><%= question.subject %></td>
+      <td><%= question.text %></td>
+      <td><%= question.username %></td>
+      <td><%= question.tags_used %></td>
+      <td><%= link_to 'Show', question_path(question) %></td>
+      <% if (question.username == @current_user) %> 
+        <td><%= link_to 'Edit', edit_question_path(question) %></td>
+        <td><%= link_to 'Destroy' , question_path(question),
+                      method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </table>  
+  <% else %>
+  <p>
+  No available questions
+  </p>
+<% end %>
+<%= link_to 'Logout', session_path(session),
+                    method: :delete, data: { confirm: 'Are you sure you wish to logout?' } %>

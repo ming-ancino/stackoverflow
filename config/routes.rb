@@ -20,7 +20,12 @@ QuestionPlatform::Application.routes.draw do
     resources :answers 
     resources :comments
   end
-
+  
+  resources :sessions
+  resource :users
+    get "login" => "sessions#new", :as => "login"
+    get "sign_up" => "users#new", :as => "sign_up"
+    get "logout" => "sessions#destroy", :as => "logout"
   # Sample resource route with options:
   #   resources :products do
   #     member do
@@ -56,7 +61,7 @@ QuestionPlatform::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-   root :to => 'home#index'
+   root :to => 'sessions#new'
    
   # See how all your routes lay out with "rake routes"
 

@@ -11,10 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140402071841) do
+ActiveRecord::Schema.define(:version => 20140408021217) do
 
   create_table "answers", :force => true do |t|
-    t.string   "answerer"
+    t.string   "username"
     t.text     "body"
     t.integer  "container_id"
     t.string   "container_type"
@@ -23,11 +23,41 @@ ActiveRecord::Schema.define(:version => 20140402071841) do
     t.integer  "answer_id"
   end
 
+  create_table "question_tags", :force => true do |t|
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "question_id"
+    t.integer  "tag_id"
+  end
+
   create_table "questions", :force => true do |t|
     t.string   "subject"
     t.text     "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "username"
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "username"
+    t.string   "password_digest"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "votes", :force => true do |t|
+    t.string   "username"
+    t.integer  "vote_value"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "voteable_id"
+    t.string   "voteable_type"
   end
 
 end
