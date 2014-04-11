@@ -11,16 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140408021217) do
+ActiveRecord::Schema.define(:version => 20140409083935) do
 
   create_table "answers", :force => true do |t|
-    t.string   "username"
+    t.string   "answerer"
     t.text     "body"
     t.integer  "container_id"
     t.string   "container_type"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.integer  "answer_id"
+    t.integer  "user_id"
   end
 
   create_table "question_tags", :force => true do |t|
@@ -35,8 +36,18 @@ ActiveRecord::Schema.define(:version => 20140408021217) do
     t.text     "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "username"
+    t.integer  "user_id"
   end
+
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "tags", :force => true do |t|
     t.string   "name"
@@ -52,12 +63,12 @@ ActiveRecord::Schema.define(:version => 20140408021217) do
   end
 
   create_table "votes", :force => true do |t|
-    t.string   "username"
     t.integer  "vote_value"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "voteable_id"
     t.string   "voteable_type"
+    t.integer  "user_id"
   end
 
 end

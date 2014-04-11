@@ -1,0 +1,10 @@
+=form_tag votes_path do
+  =hidden_field_tag :answer_id, @answer.id
+  =hidden_field_tag :type, "Answer"
+  %div
+    -if -1 < @answer.user_vote(session[:current_user])
+      =submit_tag "Downvote", :name => "vote"
+    Vote:
+    =@answer.total_votes
+    -if 1 > @answer.user_vote(session[:current_user])
+      =submit_tag "Upvote", :name => "vote" 

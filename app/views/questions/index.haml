@@ -1,0 +1,45 @@
+%h1
+  Hi #{session[:current_user].username}!
+
+%h1
+  Question List
+=form_tag questions_path, :method => 'get' do
+  .field
+    =text_field_tag :search, params[:search]
+    =submit_tag "Search", :name => nil
+=link_to "Add new question", new_question_path
+-if @questions.count > 0 
+  %table
+    %tr
+      %th
+        Subject
+      %th
+        Question
+      %th
+        Creator
+      %th
+        Tags
+      %th
+      %th
+      %th   
+    -@questions.each do |question|
+      %tr
+        %td
+          =question.subject
+        %td
+          =question.text
+        %td
+          =question.user.username
+        %td
+          =question.tags_used
+        %td
+          =link_to 'Show', question_path(question)
+        -if (question.user == session[:current_user]) 
+          %td
+            =link_to 'Edit', edit_question_path(question)
+          %td
+            =link_to 'Destroy' , question, :method => :delete, :remote => true, :class=>'delete_question', data: { confirm: 'Are you sure?' } 
+-else
+  %p
+    No available questions
+=link_to 'Logout', session_path(session), :method => :delete, data: { confirm: 'Are you sure you wish to logout?' } 

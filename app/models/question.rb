@@ -34,7 +34,7 @@ class Question < ActiveRecord::Base
   end
 
   def user_vote(current_user)
-    vote_instance  = self.votes.find(:all, :conditions => ['username = ?', current_user]).first
+    vote_instance  = self.votes.where(:user_id => current_user).first
     if vote_instance != nil
       vote_instance.vote_value
     else

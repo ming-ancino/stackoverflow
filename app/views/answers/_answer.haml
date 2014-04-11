@@ -1,0 +1,42 @@
+-if "Question" == answer.container_type 
+  %p
+    %strong
+      Answer:
+      =answer.body
+  %p
+    %strong
+      From:
+      =answer.user.username
+  %p
+    Answered on:
+    =answer.created_at
+  -@answer = answer
+  .vote{:id => "answer_#{answer.id}"}
+    =render "answers/vote"
+  
+  %h6
+    %i
+      =pluralize(answer.comments.count, "Comment")
+      =render @answer.comments
+      %br
+    Add comment:
+    =render "comments/form"
+  %p
+  -if (answer.user == session[:current_user] || @question.user ==  session[:current_user]) 
+    =link_to 'Destroy Answer', [@question, answer], method: :delete, data: { confirm: 'Are you sure?' }
+  %hr/
+
+-else
+  %h6
+    %p
+      %strong
+        Comment:
+        =answer.body
+    %p
+      %strong
+        Commented By:
+        =answer.user.username
+    %p
+      %strong
+        Commented on:
+        =answer.created_at

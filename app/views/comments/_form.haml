@@ -1,0 +1,9 @@
+%h6
+  =form_for [@question, @answer] do |f|
+    %p
+      =f.label :comment
+      %br/
+      =f.text_area :body , :value => "", :rows => 2
+    %p
+      =f.submit "Add comment"
+  

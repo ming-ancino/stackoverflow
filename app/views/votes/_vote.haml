@@ -1,0 +1,10 @@
+=form_tag votes_path, :remote => true do
+  =hidden_field_tag :question_id, @question.id
+  =hidden_field_tag :type, "Question"
+  -if -1 < @question.user_vote(session[:current_user])
+    =submit_tag "Downvote", :name => "vote" 
+  Vote: 
+  =@question.total_votes
+  -if 1 > @question.user_vote(session[:current_user])
+    =submit_tag "Upvote", :name => "vote"
+    

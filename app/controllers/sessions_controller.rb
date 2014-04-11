@@ -6,11 +6,12 @@ class SessionsController < ApplicationController
   end
 
   def create
-      user = User.find_by_username(params[:username])
+    user = User.find_by_username(params[:username])
     if user && user.authenticate(params[:password])
-     session[:user_id] = user.id
-     flash[:notice] = "Logged in!"
-     redirect_to questions_path 
+      session[:user_id] = user.id
+      session[:current_user] = user  
+      flash[:notice] = "Logged in!"
+      redirect_to questions_path 
     else
       flash.now[:alert] = "Invalid username or password"
       render "new"
@@ -19,6 +20,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    session[:current_user] = nil
     flash[:notice] = "Logged out!"
     redirect_to root_url
   end 

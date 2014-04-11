@@ -1,0 +1,3 @@
+$(document).on('ajax:success', '.delete_question', function(e) {
+    $(e.currentTarget).closest('tr').fadeOut();
+});
