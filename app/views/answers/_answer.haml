@@ -5,7 +5,7 @@
     %p.media-body.text-primary
       %strong
         Answer:
-        =answer.body
+        =simple_format(answer.body)
     %footer
       %p
         From:
@@ -39,7 +39,8 @@
                 .comments{:id => "div_comments_for_answer_#{answer.id}"}
                   =render @answer.comments
       %br
-    Add comment:
+    %h4.text-primary
+      Add comment:
     %h6
       =render "comments/form"
   %p

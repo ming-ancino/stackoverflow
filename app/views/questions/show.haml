@@ -1,5 +1,5 @@
 .container
-  .col-md-8.col-md-offset-2
+  .col-md-8.col-md-offset-2 
     %blockquote
       %h1
         %p.text-primary
@@ -9,7 +9,7 @@
       %p
         Question:
         %strong
-          =@question.text
+          =simple_format(@question.text)
       %footer
         %p
           Posted by:
@@ -21,8 +21,8 @@
         %p
         Tags:
         =@question.tags_used
-      #total_votes
-        =render 'vote'
+    #total_votes
+      =render 'vote'
       %hr/
     %h2
       #answer_div
@@ -38,7 +38,7 @@
         
     #div_answers
       =render @question.answers
-    %h4
+    %h4.text-primary 
       Add an answer:
       =render "answers/form"
       -if (@question.user.id == @current_user) 

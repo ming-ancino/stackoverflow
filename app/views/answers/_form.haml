@@ -1,6 +1,4 @@
 %p
-  Answer
-  %br/
-  %textarea#answer{rows: '3',cols: '40' ,name: 'answer'}
+  %textarea#answer{rows: '3',cols: '40' ,name: 'answer',:placeholder => 'Enter your Answer here.', :class=>'form-control'}
   %p
-  =button_tag "Add Answer", :class => 'answer btn btn-info', :'data-qid' => @question.id
+  =button_tag "Submit Answer", :class => 'answer btn btn-info', :'data-qid' => @question.id
