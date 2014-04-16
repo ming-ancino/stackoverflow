@@ -29,4 +29,23 @@ class AnswersController < ApplicationController
       @question = Question.find(params[:question_id])
       redirect_to question_path(@question)
     end
+
+    def add_answer
+       @question = Question.find(params[:q_id])
+       @answer = @question.answers.create(:body => params[:body], :user_id => session[:current_user].id)
+
+       render :partial => '/answers/answer'
+    end
+
+
+    def add_comment
+      edit_answer = Answer.find(params[:a_id])
+      comment = edit_answer.comments.create(:body => params[:body], :user_id => session[:current_user].id)
+
+      @question = edit_answer.container
+      @answer = comment
+
+      render :partial => '/answers/comment'
+    end
+
 end

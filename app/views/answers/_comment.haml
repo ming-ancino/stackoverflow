@@ -1,0 +1,12 @@
+%blockquote
+  %h6
+    %strong
+      Comment:
+      =@answer.body
+    %footer
+      %p
+        Commented By:
+        =@answer.user.username
+      %p
+        Commented on:
+        =@answer.created_at

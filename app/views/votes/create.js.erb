@@ -1,5 +1,0 @@
-  <% if params[:type] == "Question" %>
-   $('#total_votes').html('<%= escape_javascript(render('vote')) %>');
-  <% else %>
-    $('answer_#{answer.id}').html('<%= escape_javascript(render('answers/vote')) %>');
-  <% end %>

@@ -1,9 +1,7 @@
-%h6
-  =form_for [@question, @answer] do |f|
-    %p
-      =f.label :comment
-      %br/
-      =f.text_area :body , :value => "", :rows => 2
-    %p
-      =f.submit "Add comment"
-  
+%p
+  Comments
+  %br/
+  %textarea{rows: '2',cols: '40' ,name: 'comment', :id => "comment_for_#{@answer.id}"}
+  %p
+  =button_tag "Add Comments", :class => 'comment btn btn-info', :'data-a_id' => @answer.id
+

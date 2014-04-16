@@ -1,31 +1,46 @@
-%p
-  %h2
-    Subject:
-    %strong
-      =@question.subject
-%p
-  Question:
-  %strong
-    =@question.text
-%p
-  Posted by:
-  %strong
-    =@question.user.username
-%p
-  Posted on:
-  =@question.created_at
-%p
-  Tags:
-  =@question.tags_used
-#total_votes
-  =render 'vote'
-%hr/
-%h2
-  =pluralize(@question.answers.count, "Answer")
-=render @question.answers
-%h2
-  Add an answer:
-=render "answers/form"
--if (@question.user.id == @current_user) 
-  =link_to 'Edit Question', edit_question_path(@question) 
-=link_to 'Back to Questions', questions_path
+.container
+  .col-md-8.col-md-offset-2
+    %blockquote
+      %h1
+        %p.text-primary
+          Subject:
+          %strong
+            =@question.subject
+      %p
+        Question:
+        %strong
+          =@question.text
+      %footer
+        %p
+          Posted by:
+          %strong
+          =@question.user.username
+        %p
+          Posted on:
+          =@question.created_at
+        %p
+        Tags:
+        =@question.tags_used
+      #total_votes
+        =render 'vote'
+      %hr/
+    %h2
+      #answer_div
+        %span#answer_count
+          /=pluralize(@question.answers.count, "Answer")
+          -count = @question.answers.count
+          #{count} 
+        %span#answer_string
+          -if count > 1
+            Answers
+          -else
+            Answer  
+        
+    #div_answers
+      =render @question.answers
+    %h4
+      Add an answer:
+      =render "answers/form"
+      -if (@question.user.id == @current_user) 
+        =link_to 'Edit Question', edit_question_path(@question) 
+    =link_to 'Back to Questions', questions_path, :class=> 'btn btn-default'

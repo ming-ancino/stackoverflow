@@ -17,11 +17,21 @@ QuestionPlatform::Application.routes.draw do
   
 
   resources :questions do
-    resources :answers
+    resources :answers do
+      collection do
+        post 'add_answer'
+        post 'add_comment'
+      end
+    end
     resources :comments
   end
   
-  resources :votes
+  resources :votes do
+    collection do
+      post 'vote'
+    end
+  end
+
   resources :sessions
   resource :users
     get "login" => "sessions#new", :as => "login"

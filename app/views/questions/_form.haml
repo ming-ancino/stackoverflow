@@ -1,4 +1,4 @@
-=form_for @question, :remote => true do |f|
+=form_for @question do |f|
   -if @question.errors.any?
     .error_explanation
       %h2
@@ -11,14 +11,14 @@
   %p
     =f.label :subject
     %br/
-    =f.text_field :subject
+    =f.text_field :subject, :placeholder => 'Enter Subject'
   %p
     =f.label :text
     %br/
-    =f.text_area :text, :rows => 5  
+    =f.text_area :text, :rows => 5, :placeholder => 'Enter Details'
   .field
     =f.label :tags
     %br/
-    =f.text_field :tags_used 
+    =f.text_field :tags_used , :placeholder => 'Enter tags separated by commas'
   %p
-    =f.submit
+    =f.submit :class =>'btn btn-primary'
