@@ -1,15 +1,15 @@
 class CommentsController < ApplicationController
-    def create
+  def create
       @question = Question.find(params[:question_id])
-      @answer =@question.find.(params[:answer_id])
-      @comments = @answers.create(params[:id])
-      redirect_to question_path(@question)
-    end
+      parent_answer = Answer.find(params[:answer_id])
+      comment = parent_answer.comments.create(params[:answer].merge(:user_id => self.current_user.id))
+      @answer = comment
+      @id = params[:answer_id]
 
-    def destroy
-      @question = Question.find(params[:question_id])
-      @answer = @question.answers.find(params[:id])
-      @answer.destroy
-      redirect_to question_path(@question)
-    end
+     respond_to do |format|
+       format.html { redirect_to question_path(@question) }
+       format.js 
+     end
+
+  end
 end

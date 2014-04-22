@@ -1,4 +1,4 @@
-require File.expand_path('../boot', __FILE__)
+    require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
@@ -11,6 +11,7 @@ end
 
 module QuestionPlatform
   class Application < Rails::Application
+    config.action_view.javascript_expansions[:defaults] = ['jquery-1.4.2', 'jquery-ujs/src/rails']
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -58,5 +59,8 @@ module QuestionPlatform
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    #config.action_view.javascript_expansions[:defaults] = ['jquery-1.4.2', 'jquery-ujs/src/rails']
+    
+
   end
 end

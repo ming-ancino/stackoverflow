@@ -1,10 +1,12 @@
 class Vote < ActiveRecord::Base
-  attr_accessible :answer_id, :username, :vote_value
+
+  attr_accessible :answer_id, :username, :vote_value, :user_id
+
   belongs_to :voteable , :polymorphic => true
 
-  def self.check_user(voteable, username)
+  def self.check_user(voteable, user_id)
 
-    if voteable.votes.find(:all, :conditions => ['username = ?', username]).first != nil
+    if voteable.votes.where(:user_id => user_id ).first != nil
         true
     else
         false
@@ -12,8 +14,32 @@ class Vote < ActiveRecord::Base
 
   end
 
-  def self.vote_value(voteable, username)
-     voteable.votes.find(:all, :conditions => ['username = ?',username]).first.vote_value
+  def self.vote_value(voteable, user_id)
+    voteable.votes.where(
+        :user_id => user_id).
+    first.
+    vote_value
   end
+
+  def self.calculate_vote(voteable, user, value)
+    if self.check_user(voteable, user)
+      target_vote = voteable.votes.where(
+          :user_id => user).
+      first
+
+      target_vote.update_attributes(
+        :vote_value => target_vote.vote_value + value)
+    else
+     voteable.votes.create(
+        :user_id=> user, 
+        :vote_value => value)
+    end
+
+  end
+
+  def self.get_vote(voteable,user_id)
+    voteable.votes.where(:user_id => user_id ).first
+  end
+
 
 end

@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  include ApplicationHelper
 
   before_filter :require_login
   protect_from_forgery
@@ -7,7 +6,6 @@ class ApplicationController < ActionController::Base
 
   
   helper_method :current_user
-  helper_method :get_current_user
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]

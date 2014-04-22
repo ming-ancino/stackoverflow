@@ -1,0 +1,52 @@
+.container
+  .row
+    .row.bg-primary
+      .col-md-4.col-md-offset-4
+        %h1
+          Hi #{session[:current_user].username}!
+
+        %h1
+          Question List
+    .col-md-4.col-md-offset-4
+      =form_tag questions_path, :class => 'inline', :method => 'get' do
+        .field.form-group
+          =text_field_tag :search, params[:search], :placeholder => 'Enter Keyword'
+          =submit_tag "Search", :name => nil, :class => 'btn btn-default'
+      =link_to "Add new question", new_question_path, :class => 'btn btn-success'
+  .row
+    .col-md-10.col-md-offset-1
+      %br/
+      -if @questions.count > 0 
+        %table.table.table-striped.table-bordered.table-condensed.table-hover.table-responsive
+          %tr.info
+            %th
+              Subject
+            %th
+              Question
+            %th
+              Creator
+            %th
+              Tags
+            %th
+              Actions 
+          -@questions.each do |question|
+            %tr
+              %td.text-success
+                =question.subject
+              %td
+                =question.text
+              %td
+                =question.user.username
+              %td
+                =question.tags_used
+              %td
+                .btn.btn-group
+                  =link_to 'Show', question_path(question), :class =>'btn btn-info'
+                  %i.icon-edit.icon-white
+                  -if (question.user == session[:current_user]) 
+                    =link_to 'Edit', edit_question_path(question), :class =>'btn btn-primary'
+                    =link_to 'Destroy' , question, :method => :delete, :class=>'delete_question btn btn-small btn-danger', :id => 'delete_question'+question.id.to_s, data: { confirm: 'Are you sure?' } , :remote => true, :'data-id' => question.id
+      -else
+        %p
+          No available questions
+      =link_to 'Logout', session_path(session), :method => :delete, data: { confirm: 'Are you sure you wish to logout?' } 

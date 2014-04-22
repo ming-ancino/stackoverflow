@@ -1,0 +1,8 @@
+$('#div_answers').append("<%=j render :partial => '/answers/answer', :locals => {:answer => @answer}%>");
+var count =  parseInt($('span#answer_count').text());
+count ++;
+$('span#answer_count').text(count)
+if(count > 1)
+  $('span#answer_string').text("Answers")
+else
+  $('span#answer_string').text("Answer")

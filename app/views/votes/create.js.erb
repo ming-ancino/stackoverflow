@@ -1,0 +1,5 @@
+<% if @answer.present? %>
+    $('#answer_' + <%= @vid %>).html("<%=j render :partial => '/answers/vote'%>")
+<% else %>
+    $('#total_votes').html("<%=j render :partial => '/questions/vote'%>");
+<% end %>

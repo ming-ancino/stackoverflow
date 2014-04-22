@@ -1,0 +1,45 @@
+.container
+  .col-md-8.col-md-offset-2 
+    %blockquote
+      %h1
+        %p.text-primary
+          Subject:
+          %strong
+            =@question.subject
+      %p
+        Question:
+        %strong
+          =simple_format(@question.text)
+      %footer
+        %p
+          Posted by:
+          %strong
+          =@question.user.username
+        %p
+          Posted on:
+          =@question.created_at
+        %p
+        Tags:
+        =@question.tags_used
+    #total_votes
+      =render 'vote'
+    %hr{:style => "border: 2px solid black"}
+    %h2
+      #answer_div
+        %span#answer_count
+          -count = @question.answers.count
+          #{count} 
+        %span#answer_string
+          -if count > 1
+            Answers
+          -else
+            Answer  
+        
+    #div_answers
+      =render :collection => @answers, :locals =>{:comment => @comment, :question => @question}, :partial => "answers/answer"
+    %h4.text-primary.bg-success 
+      Add an answer:
+      =render "answers/form"
+      -if (@question.user.id == @current_user) 
+        =link_to 'Edit Question', edit_question_path(@question) 
+    =link_to 'Back to Questions', questions_path, :class=> 'btn btn-default'

@@ -1,12 +1,16 @@
 class Question < ActiveRecord::Base
+
   attr_accessible :username, :subject, :text, :tags_used
+
   belongs_to :user
   has_many :answers, :dependent => :destroy, :as => :container
   has_many :question_tags
   has_many :tags, :through => :question_tags
   has_many :votes, :as => :voteable
+
   validates :subject, :presence => true,
                     :length => { :minimum => 5 }
+
   def tags_used
      self.tags.map { |t| t.name }.join(", ")
    end
@@ -18,7 +22,9 @@ class Question < ActiveRecord::Base
 
   def self.search(search)
     if search && search != ""
-      tag_search = Tag.find(:all, :conditions => ['name LIKE ?', "%#{search.strip}%"])
+      tag_search = Tag.find(
+          :all, 
+          :conditions => ['name LIKE ?', "%#{search.strip}%"])
       question_array = [] 
       (tag_search.map { |tag| tag.questions }).map do |each_question|
         question_array = (question_array + each_question).uniq
@@ -34,7 +40,9 @@ class Question < ActiveRecord::Base
   end
 
   def user_vote(current_user)
-    vote_instance  = self.votes.find(:all, :conditions => ['username = ?', current_user]).first
+    vote_instance  = self.votes.where(
+        :user_id => current_user).
+    first
     if vote_instance != nil
       vote_instance.vote_value
     else
