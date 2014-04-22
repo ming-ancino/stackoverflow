@@ -18,19 +18,13 @@ QuestionPlatform::Application.routes.draw do
 
   resources :questions do
     resources :answers do
-      collection do
-        post 'add_answer'
-        post 'add_comment'
-      end
+      resources :comments
+      resources :votes
     end
-    resources :comments
+    resources :votes
   end
   
-  resources :votes do
-    collection do
-      post 'vote'
-    end
-  end
+  
 
   resources :sessions
   resource :users

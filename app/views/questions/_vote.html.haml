@@ -1,0 +1,57 @@
+-#%div
+-#  -if 1 > @question.user_vote(session[:current_user])
+-#    =button_tag "Upvote", :class => 'vote btn btn-success', :'data-vote' => 1, :'data-vid' => @question.id, :'data-type' => 'question'
+
+-#  -else
+-#    =button_tag "Upvote", :class => 'vote btn btn-success', :'data-vote' => 1, :'data-vid' => @question.id, :'data-type' => 'question', :disabled => 'disabled'
+-#%a
+-#  Vote:
+-#  %span.badge
+-#   =@question.total_votes
+-#%div
+-#  -if -1 < @question.user_vote(session[:current_user])
+-#    =button_tag "Downvote", :class => 'vote btn btn-danger ', :'data-vote' => -1, :'data-vid' => @question.id, :'data-type' => 'question'
+-#  -else
+-#    =button_tag "Downvote", :class => 'vote btn btn-danger ', :'data-vote' => -1, :'data-vid' => @question.id, :'data-type' => 'question', :disabled => 'disabled'
+
+-#%div
+-#  =form_for Vote.new, :remote => true do |f|
+-#    =hidden_field_tag 'vote', 1
+-#    =hidden_field_tag 'vid', @question.id
+-#    =hidden_field_tag 'type', 'question'
+-#    -if 1 > @question.user_vote(session[:current_user])
+-#     =f.submit "Upvote", :class => 'btn btn-success'
+-#    -else
+-#     =f.submit "Upvote", :class => 'btn btn-success',:disabled => 'disabled'
+-#%a
+-#  Vote:
+-#  %span.badge
+-#    =@question.total_votes
+-#  =form_for Vote.new, :remote => true do |f|
+-#    =hidden_field_tag 'vote', -1
+-#    =hidden_field_tag 'vid', @question.id
+-#    =hidden_field_tag 'type', 'question'
+-#    -if -1 < @question.user_vote(session[:current_user])
+-#      =f.submit "Downvote", :class => 'btn btn-danger'
+-#    -else
+-#      =f.submit "Downvote", :class => 'btn btn-danger',:disabled => 'disabled'
+
+-vote = Vote.get_vote(@question,session[:current_user])
+%div
+  -if nil == vote
+    =link_to 'Upvote', question_votes_path(@question, :vote_value => 1 ), :class =>'btn btn-success', :remote => true, method: :post
+  -elsif 1 <= @question.user_vote(session[:current_user])
+    =link_to 'Upvote', question_votes_path(@question.id), :class =>'btn btn-success', :remote => true,:disabled => 'disabled'
+  -else
+    =link_to 'Upvote', question_vote_path(@question, vote.id), method: :delete, :class => 'btn btn-danger ', :remote => true, :class =>'btn btn-success'
+%a
+  Vote:
+  %span.badge
+    =@question.total_votes
+%div
+  -if nil == vote
+    =link_to 'Downvote', question_votes_path(@question,:vote_value => -1), :class =>'btn btn-danger', :remote => true, method: :post
+  -elsif -1 >= @question.user_vote(session[:current_user])
+    =link_to 'Downvote', question_votes_path(@question.id), :class =>'btn btn-danger', :remote => true,:disabled => 'disabled'
+  -else
+    =link_to 'Downvote', question_vote_path(@question,vote), method: :delete, :class => 'btn btn-danger ', :remote => true, :class =>'btn btn-danger'

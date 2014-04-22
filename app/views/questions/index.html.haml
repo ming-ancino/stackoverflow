@@ -45,7 +45,7 @@
                   %i.icon-edit.icon-white
                   -if (question.user == session[:current_user]) 
                     =link_to 'Edit', edit_question_path(question), :class =>'btn btn-primary'
-                    =link_to 'Destroy' , question, :method => :delete, :class=>'delete_question btn btn-small btn-danger', data: { confirm: 'Are you sure?' } , :remote => true, :'data-id' => question.id
+                    =link_to 'Destroy' , question, :method => :delete, :class=>'delete_question btn btn-small btn-danger', :id => 'delete_question'+question.id.to_s, data: { confirm: 'Are you sure?' } , :remote => true, :'data-id' => question.id
       -else
         %p
           No available questions

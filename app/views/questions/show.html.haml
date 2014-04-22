@@ -23,11 +23,10 @@
         =@question.tags_used
     #total_votes
       =render 'vote'
-      %hr/
+    %hr{:style => "border: 2px solid black"}
     %h2
       #answer_div
         %span#answer_count
-          /=pluralize(@question.answers.count, "Answer")
           -count = @question.answers.count
           #{count} 
         %span#answer_string
@@ -37,8 +36,8 @@
             Answer  
         
     #div_answers
-      =render @question.answers
-    %h4.text-primary 
+      =render :collection => @answers, :locals =>{:comment => @comment, :question => @question}, :partial => "answers/answer"
+    %h4.text-primary.bg-success 
       Add an answer:
       =render "answers/form"
       -if (@question.user.id == @current_user) 
