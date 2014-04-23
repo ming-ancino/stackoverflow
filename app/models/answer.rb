@@ -6,7 +6,6 @@
   belongs_to :container, :polymorphic => true
   belongs_to :user
   has_many :comments ,
-      :class_name => 'Answer', 
       :dependent => :destroy, 
       :as => :container
   has_many :votes, :as => :voteable

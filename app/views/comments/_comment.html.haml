@@ -1,11 +1,11 @@
 %blockquote
   %h6
     %strong
-      =simple_format(answer.body)
+      =simple_format(comment.body)
     %footer
       %p
         Commented By:
-        =answer.user.username
+        =comment.user.username
       %p
         Commented on:
-        =answer.created_at
+        =comment.created_at

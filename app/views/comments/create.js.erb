@@ -1,4 +1,4 @@
-$('#div_comments_for_answer_' + <%= @id %>).append("<%=j render :partial => '/answers/comment', :locals => {:answer => @answer}%>");
+$('#div_comments_for_answer_' + <%= @id %>).append("<%=j render :partial => '/comments/comment', :locals => {:comment => @comment}%>");
 $('comment_for_'+ <%= @id %>).val("");
 var count =  parseInt($('span#comment_count_'+ <%= @id %>).text());
 count ++;
@@ -7,4 +7,4 @@ if(count > 1)
   $('span#comment_string_'+<%= @id %>).text("Comments")
 else
   $('span#comment_string_'+ <%= @id %>).text("Comment")
-$('#collapse'+ <%= @id %>).collapse('show');
+//$('#collapse'+ <%= @id %>).collapse('show');
