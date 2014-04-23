@@ -36,10 +36,10 @@
             Answer  
         
     #div_answers
-      =render :collection => @answers, :locals =>{:comment => @comment, :question => @question}, :partial => "answers/answer"
+      =render :collection => @answers, :locals =>{:comment => @comment, :question => @question}, :partial => 'answers/answer'
     %h4.text-primary.bg-success 
       Add an answer:
-      =render "answers/form"
+      =render 'answers/form'
       -if (@question.user.id == @current_user) 
         =link_to 'Edit Question', edit_question_path(@question) 
     =link_to 'Back to Questions', questions_path, :class=> 'btn btn-default'

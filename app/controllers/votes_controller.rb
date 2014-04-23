@@ -13,7 +13,7 @@ class VotesController < ApplicationController
 
   def destroy
     vote = Vote.find(params[:id])
-    if vote.voteable_type ==  "Question" 
+    if vote.voteable_type ==  'Question' 
       @question = vote.voteable
     else
       @answer = vote.voteable

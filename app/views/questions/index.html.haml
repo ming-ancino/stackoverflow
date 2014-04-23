@@ -11,8 +11,8 @@
       =form_tag questions_path, :class => 'inline', :method => 'get' do
         .field.form-group
           =text_field_tag :search, params[:search], :placeholder => 'Enter Keyword'
-          =submit_tag "Search", :name => nil, :class => 'btn btn-default'
-      =link_to "Add new question", new_question_path, :class => 'btn btn-success'
+          =submit_tag 'Search', :name => nil, :class => 'btn btn-default'
+      =link_to 'Add new question', new_question_path, :class => 'btn btn-success'
   .row
     .col-md-10.col-md-offset-1
       %br/
