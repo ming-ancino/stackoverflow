@@ -17,7 +17,7 @@ class Question < ActiveRecord::Base
 
    def tags_used=(list)
      tag_names = list.split(/,/)
-     self.tags = tag_names.map { |name| Tag.where('name = ?', name).first or Tag.create(:name => name) }
+     self.tags = tag_names.map { |name| Tag.where(:name => name).first or Tag.create(:name => name) }
    end  
 
   def self.search(search)
@@ -42,7 +42,7 @@ class Question < ActiveRecord::Base
   def user_vote(current_user)
     vote_instance  = self.votes.where(
         :user_id => current_user).
-    first
+     first
     if vote_instance != nil
       vote_instance.vote_value
     else

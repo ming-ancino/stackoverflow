@@ -8,8 +8,8 @@
         %h1
           Question List
     .col-md-4.col-md-offset-4
-      =form_tag questions_path, :class => 'inline', :method => 'get' do
-        .field.form-group
+      =form_tag questions_path, :class => 'inline form-search', :method => 'get' do
+        .field.form-group.input-append
           =text_field_tag :search, params[:search], :placeholder => 'Enter Keyword'
           =submit_tag 'Search', :name => nil, :class => 'btn btn-default'
       =link_to 'Add new question', new_question_path, :class => 'btn btn-success'
@@ -41,11 +41,11 @@
                 =question.tags_used
               %td
                 .btn.btn-group
-                  =link_to 'Show', question_path(question), :class =>'btn btn-info'
+                  =link_to :Show, question_path(question), :class =>:'btn btn-info'
                   -if (question.user == session[:current_user]) 
-                    =link_to 'Edit', edit_question_path(question), :class =>'btn btn-primary'
-                    =link_to 'Destroy' , question, :method => :delete, :class=>'delete_question btn btn-danger', :id => 'delete_question'+question.id.to_s, data: { confirm: 'Are you sure?' } , :remote => true, :'data-id' => question.id
+                    =link_to :Edit, edit_question_path(question), :class =>:'btn btn-primary'
+                    =link_to :Destroy , question, :method => :delete, :class=>:'delete_question btn btn-danger', :id => 'delete_question'+question.id.to_s, data: { confirm: :'Are you sure?' } , :remote => true, :'data-id' => question.id
       -else
         %p
           No available questions
-      =link_to 'Logout', session_path(session), :method => :delete, data: { confirm: 'Are you sure you wish to logout?' } 
+      =link_to :Logout, session_path(session), :method => :delete, data: { confirm: :'Are you sure you wish to logout?' } 
