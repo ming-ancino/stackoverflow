@@ -1,25 +1,25 @@
 -vote = Vote.get_vote(@answer,session[:current_user])
 %div
   -if nil == vote 
-    =link_to  question_answer_votes_path(@answer.container,@answer,:vote_value => 1 ), :class =>:'btn btn-success', :remote => true, method: :post do
-      =image_tag :'', :class => :'icon-thumbs-up'
+    =link_to  question_answer_votes_path(@answer.container,@answer,:vote_value => 1 ), :class =>'btn btn-success', :remote => true, method: :post do
+      =image_tag '', :class => 'icon-thumbs-up'
   -elsif 1 <= @answer.user_vote(session[:current_user])
-    =link_to  question_answer_votes_path(@answer.container,@answer), :class =>:'btn btn-success', :remote => true,:disabled => :'disabled' do
-      =image_tag :'',:class => :'icon-thumbs-up'
+    =link_to  question_answer_votes_path(@answer.container,@answer), :class =>'btn btn-success', :remote => true,:disabled => 'disabled' do
+      =image_tag '',:class => 'icon-thumbs-up'
   -else
-    =link_to question_answer_vote_path(@answer.container,@answer,vote), method: :delete, :class => :'btn btn-danger ', :remote => true, :class =>:'btn btn-success' do
-      =image_tag :'', :class => :'icon-thumbs-up'
+    =link_to question_answer_vote_path(@answer.container,@answer,vote), method: :delete, :class => 'btn btn-danger ', :remote => true, :class =>'btn btn-success' do
+      =image_tag '', :class => 'icon-thumbs-up'
 %a
   Vote:
   %span.badge.badge-info
     =@answer.total_votes
 %div
   -if nil == vote 
-    =link_to  question_answer_votes_path(@answer.container,@answer,:vote_value => -1), :class =>:'btn btn-danger', :remote => true, method: :post do
-      =image_tag :'', :class => :'icon-thumbs-down'
+    =link_to  question_answer_votes_path(@answer.container,@answer,:vote_value => -1), :class =>'btn btn-danger', :remote => true, method: :post do
+      =image_tag '', :class => 'icon-thumbs-down'
   -elsif -1 >= @answer.user_vote(session[:current_user])
-    =link_to  question_answer_votes_path(@answer.container,@answer), :class =>:'btn btn-danger', :remote => true,:disabled => :'disabled' do
-      =image_tag :'', :class => :'icon-thumbs-down'
+    =link_to  question_answer_votes_path(@answer.container,@answer), :class =>'btn btn-danger', :remote => true,:disabled => 'disabled' do
+      =image_tag '', :class => 'icon-thumbs-down'
   -else
-    =link_to  question_answer_vote_path(@answer.container,@answer,vote), method: :delete, :class => :'btn btn-danger ', :remote => true, :class =>:'btn btn-danger' do
-      =image_tag :'', :class => :'icon-thumbs-down'
+    =link_to  question_answer_vote_path(@answer.container,@answer,vote), method: :delete, :class => 'btn btn-danger ', :remote => true, :class =>'btn btn-danger' do
+      =image_tag :'', :class => 'icon-thumbs-down'

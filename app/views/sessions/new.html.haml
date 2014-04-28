@@ -4,12 +4,12 @@
 -if flash[:alert]
   %p.notice.alert.alert-danger
     =flash[:alert]
-    %button{ :type => :button, :class => :close, :'data-dismiss'=> :alert, :'aria-hidden' => :true}
+    %button{ :type => :button, :class => :close, :'data-dismiss'=> :alert, 'aria-hidden' => :true}
       &times;
 %h1
   Login
 
-= link_to :'Sign up', new_users_path
+= link_to 'Sign up', new_users_path
 = form_tag(sessions_path)  do
   .field
     = label_tag :username
@@ -19,4 +19,4 @@
     = label_tag :password
     = password_field_tag :password 
   .actions
-    = submit_tag :'Log in', :class => :'btn btn-default'
+    = submit_tag 'Log in', :class => 'btn btn-default'

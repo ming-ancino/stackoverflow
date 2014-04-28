@@ -23,7 +23,7 @@
         =@question.tags_used
     #total_votes
       =render 'vote'
-    %hr{:style => :'border: 2px solid black'}
+    %hr{:style => 'border: 2px solid black'}
     %h2
       #answer_div
         %span#answer_count
@@ -41,5 +41,5 @@
       Add an answer:
       =render 'answers/form'
       -if (@question.user.id == @current_user) 
-        =link_to :'Edit Question', edit_question_path(@question) 
-    =link_to :'Back to Questions', questions_path, :class=> :'btn btn-default'
+        =link_to 'Edit Question', edit_question_path(@question) 
+    =link_to 'Back to Questions', questions_path, :class=> 'btn btn-default'
