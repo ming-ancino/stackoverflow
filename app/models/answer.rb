@@ -1,5 +1,4 @@
-
- class Answer < ActiveRecord::Base
+class Answer < ActiveRecord::Base
 
   attr_accessible :user_id, :body
 
@@ -9,7 +8,7 @@
       :dependent => :destroy, 
       :as => :container
   has_many :votes, :as => :voteable
-  
+
 
   def total_votes
     self.votes.sum(&:vote_value)
@@ -26,5 +25,4 @@
       0
     end
   end
-
 end

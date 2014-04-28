@@ -49,5 +49,4 @@ class Question < ActiveRecord::Base
       0
     end
   end
-
 end

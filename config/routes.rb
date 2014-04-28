@@ -13,8 +13,8 @@ QuestionPlatform::Application.routes.draw do
 
   resources :sessions
   resource :users
-    get "login" => "sessions#new", :as => "login"
-    get "sign_up" => "users#new", :as => "sign_up"
-    get "logout" => "sessions#destroy", :as => "logout"
+    get 'login' => 'sessions#new'
+    get 'sign_up' => 'users#new'
+    get 'logout' => 'sessions#destroy'
    root :to => 'sessions#new'
 end
