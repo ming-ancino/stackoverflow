@@ -25,5 +25,9 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'haml', '~> 3.1.4'
 gem 'bootstrap-sass', '~> 2.1.1'
 
- gem 'sprockets-rails', '=2.0.0.backport1'
- gem 'sprockets', '=2.2.2.backport2'
+gem 'sprockets-rails', '=2.0.0.backport1'
+gem 'sprockets', '=2.2.2.backport2'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0.beta'
+end
