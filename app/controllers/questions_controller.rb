@@ -1,9 +1,9 @@
 class QuestionsController < ApplicationController
 
   def index
-     @search_string = params[:search]
-     @questions = Question.search(@search_string)
+    @questions = Question.all
   end
+
 
   def show
     @question = Question.find(params[:id])
@@ -50,6 +50,14 @@ class QuestionsController < ApplicationController
      format.html { redirect_to(questions_path) }
      format.js 
    end
+  end
+
+
+  def search
+    @search_string = params[:search]
+    @questions = Question.search(@search_string)
+
+    render :index
   end
 
 end

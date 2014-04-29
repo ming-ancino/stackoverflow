@@ -1,24 +1,50 @@
 require 'spec_helper'
 
-describe QuestionsController do
-  let(:valid_attributes) { { :subject => "Subject", :text => "Text"} }
+describe QuestionsController, :signed_in => true do
 
+  let(:valid_attributes) { { :subject => "Subject", :text => "Text"} }
   let(:valid_session) { {} }
 
-  describe "GET index" do
-    # it "assigns all widgets as @widgets" do
-    #   widget = Widget.create! valid_attributes
-    #   get :index, {}, valid_session
-    #   assigns(:widgets).should eq([widget])
-    # end
+
+  describe '#index' do
+
+    let(:action) { get :index }
+    let(:collection) { assigns :questions }
+
+    before :all do
+      FactoryGirl.create_list :question, 2
+    end
+
+    it 'renders the index template' do
+      action
+      expect(response).to render_template(:index)
+    end
+
+    it 'assigns to @questions' do
+      action
+      expect(collection).not_to be_empty
+    end
+
+    after :all do
+      Question.destroy_all
+    end
+
   end
 
-  describe "GET show" do
-    it "assigns the requested question as @question" do
-      user = User.new(:username => "user", :password => "user")
-      question = Question.create! valid_attributes, user
-      get :show, {:id => question.to_param}, valid_session
-      assigns(:question).should eq(question)
+
+  describe '#show' do
+
+    let(:question) { FactoryGirl.create :question }
+    let(:action) { get :show, :id => question.id }
+
+    it 'renders the show template' do
+      action
+      expect(response).to render_template(:show)
+    end
+
+    it 'assigns to @question' do
+      action
+      expect(assigns :question).not_to be_nil
     end
   end
 

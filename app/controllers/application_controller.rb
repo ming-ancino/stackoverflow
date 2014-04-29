@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
 
   before_filter :require_login
   protect_from_forgery
-  force_ssl
 
   helper_method :current_user
 
@@ -13,9 +12,7 @@ class ApplicationController < ActionController::Base
   private
 
   def require_login
-    unless current_user
-      redirect_to root_url
-    end
+    redirect_to root_url unless current_user
   end
 
 end
