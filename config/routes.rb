@@ -1,7 +1,9 @@
 QuestionPlatform::Application.routes.draw do
 
-  resources :home
-  
+  root :to => 'sessions#new'  
+  get 'login' => 'sessions#new'
+  get 'sign_up' => 'users#new'
+  get 'logout' => 'sessions#destroy'
 
   resources :questions do
     resources :answers do
@@ -12,9 +14,6 @@ QuestionPlatform::Application.routes.draw do
   end
 
   resources :sessions
-  resource :users
-    get 'login' => 'sessions#new'
-    get 'sign_up' => 'users#new'
-    get 'logout' => 'sessions#destroy'
-   root :to => 'sessions#new'
+  resources :users
+
 end
