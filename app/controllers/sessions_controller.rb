@@ -10,18 +10,18 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       session[:current_user] = user  
-      flash[:notice] = "Logged in!"
+      flash[:notice] = :'Logged in!'
       redirect_to questions_path 
     else
-      flash.now[:alert] = "Invalid username or password"
-      render "new"
+      flash.now[:alert] = :'Invalid username or password'
+      render 'new'
     end
   end
 
   def destroy
     session[:user_id] = nil
     session[:current_user] = nil
-    flash[:notice] = "Logged out!"
+    flash[:notice] = :'Logged out!'
     redirect_to root_url
   end 
 end

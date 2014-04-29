@@ -1,5 +1,6 @@
 %p
   =form_for [@question, Answer.new], :remote => true do |f|
-    =f.text_area :body, rows: '3',cols: '40' ,:placeholder => 'Enter your Answer here.', :class=>'form-control'
-    =f.submit "Submit Answer", :class => 'btn btn-info'
+    =f.text_area :body, rows: '3',:placeholder => 'Enter your Answer here.', :class=>'form-control'
+    %br
+    =f.submit 'Submit Answer', :class => 'btn btn-info'
  

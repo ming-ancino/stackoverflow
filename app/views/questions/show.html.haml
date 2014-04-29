@@ -1,8 +1,8 @@
 .container
   .col-md-8.col-md-offset-2 
     %blockquote
-      %h1
-        %p.text-primary
+      %p
+        %h1
           Subject:
           %strong
             =@question.subject
@@ -17,13 +17,13 @@
           =@question.user.username
         %p
           Posted on:
-          =@question.created_at
+          =@question.created_at.to_formatted_s(:short) 
         %p
         Tags:
         =@question.tags_used
     #total_votes
       =render 'vote'
-    %hr{:style => "border: 2px solid black"}
+    %hr{:style => 'border: 2px solid black'}
     %h2
       #answer_div
         %span#answer_count
@@ -36,10 +36,10 @@
             Answer  
         
     #div_answers
-      =render :collection => @answers, :locals =>{:comment => @comment, :question => @question}, :partial => "answers/answer"
+      =render :collection => @answers, :locals =>{:comment => @comment, :question => @question}, :partial => 'answers/answer'
     %h4.text-primary.bg-success 
       Add an answer:
-      =render "answers/form"
+      =render 'answers/form'
       -if (@question.user.id == @current_user) 
         =link_to 'Edit Question', edit_question_path(@question) 
     =link_to 'Back to Questions', questions_path, :class=> 'btn btn-default'

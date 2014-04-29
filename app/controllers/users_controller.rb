@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      flash[:notice] =  "Signed up!"
+      flash[:notice] =  'Signed up!'
       redirect_to new_session_path  
     else
       render 'new'

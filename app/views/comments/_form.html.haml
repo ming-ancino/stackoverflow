@@ -1,10 +1,5 @@
--#
--# question
--# answer
--# comment
-
-
 %p
   =form_for comment, :url => question_answer_comments_path(question,answer), :remote => true do |f|
-    =f.text_area :body, rows: '2',cols: '40' ,:placeholder => 'Enter your Comment here.', :class=>'form-control'
-    =f.submit "Submit Comment", :class => 'btn btn-info'
+    =f.text_area :body, rows: '2' ,:placeholder => 'Enter your Comment here.', :class=>'form-control'
+    %br
+    =f.submit 'Submit Comment', :class => 'btn btn-info btn-small'

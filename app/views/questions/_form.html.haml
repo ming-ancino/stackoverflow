@@ -1,10 +1,10 @@
 =form_for @question, :class=>'form-horizontal' do |f|
   -if @question.errors.any?
     .error_explanation.alert.alert-danger
-      %button{ :type => "button", :class => "close", :'data-dismiss'=> "alert", :'aria-hidden' => "true"}
+      %button{ :type => :button, :class => :close, 'data-dismiss'=> :alert, 'aria-hidden' => :true}
         &times;
       %h6
-        =pluralize(@question.errors.count, "error")
+        =pluralize(@question.errors.count, 'error')
         prohibited this question from being saved:
       %ul
         -@question.errors.full_messages.each do |msg|

@@ -40,6 +40,5 @@ class Vote < ActiveRecord::Base
   def self.get_vote(voteable,user_id)
     voteable.votes.where(:user_id => user_id ).first
   end
-
-
+  
 end

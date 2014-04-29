@@ -1,0 +1,11 @@
+%blockquote
+  %h6
+    %strong
+      =simple_format(comment.body)
+    %footer
+      %p
+        Commented By:
+        =comment.user.username
+      %p
+        Commented on:
+        =comment.created_at.to_formatted_s(:short) 

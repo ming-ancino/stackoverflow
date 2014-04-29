@@ -1,16 +1,14 @@
-
- class Answer < ActiveRecord::Base
+class Answer < ActiveRecord::Base
 
   attr_accessible :user_id, :body
 
   belongs_to :container, :polymorphic => true
   belongs_to :user
   has_many :comments ,
-      :class_name => 'Answer', 
       :dependent => :destroy, 
       :as => :container
   has_many :votes, :as => :voteable
-  
+
 
   def total_votes
     self.votes.sum(&:vote_value)
@@ -27,5 +25,4 @@
       0
     end
   end
-
 end
