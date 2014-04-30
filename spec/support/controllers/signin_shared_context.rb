@@ -1,7 +1,7 @@
 shared_context 'when signed in', :signed_in => true do
 
-  let(:user) { FactoryGirl.create :user }
+  let(:curr_user) { FactoryGirl.create :user }
 
-  before(:each) { session[:user_id] = user.id }
+  before(:each) { session[:user_id] = curr_user.id }
 
 end
